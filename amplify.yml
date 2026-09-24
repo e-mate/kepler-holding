@@ -1,0 +1,46 @@
+# AWS Amplify build settings for the Kepler holding page.
+#
+# There is nothing to build: the site is one HTML file and a handful of
+# images, so the build phase is empty and Amplify simply publishes the
+# folder. baseDirectory '/' means "the repo root is the site root".
+#
+# This is NOT the config for the Next app. That one needs a real build
+# (`npm ci && npm run build`), a Node runtime, and the API reachable at
+# INTERNAL_API_URL - see the note in the README beside this file.
+
+version: 1
+frontend:
+  phases:
+    build:
+      commands: []
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths: []
+
+# Security headers. A static page still benefits from them, and setting them
+# here means they survive a redeploy rather than living in someone's console.
+customHeaders:
+  - pattern: '**'
+    headers:
+      - key: X-Content-Type-Options
+        value: nosniff
+      - key: X-Frame-Options
+        value: DENY
+      - key: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      # Only what this page actually uses: its own assets, inline CSS and the
+      # one inline script, plus the Google Fonts stylesheet and font files.
+      # No connect-src at all, because the page makes no network calls.
+      - key: Content-Security-Policy
+        value: >-
+          default-src 'self';
+          img-src 'self' data:;
+          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+          font-src https://fonts.gstatic.com;
+          script-src 'self' 'unsafe-inline';
+          frame-ancestors 'none';
+          base-uri 'self';
+          form-action 'none'

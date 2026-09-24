@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Kepler</title>
+  <rect x="0" y="0" width="64" height="64" rx="14.0" fill="#181D2B"/>
+  <g transform="translate(32 32) scale(0.74743) translate(-33.004 -32.000)">
+  <path d="M55.638 31.112 A 26.0 14.5 -20.0 1 1 50.679 17.486" fill="none" stroke="#EAEEF7" stroke-width="3.0" stroke-linecap="round"/>
+  <circle cx="55.638" cy="31.112" r="4.8" fill="#D0FF00"/>
+  </g>
+</svg>
